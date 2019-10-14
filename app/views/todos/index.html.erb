@@ -1,0 +1,29 @@
+<div>
+  <h1>Задачи</h1>
+  <%= image_tag @plus_img, size: '40x40', id: 'new_todo'%>
+  <% @projects.each do |project| %>
+    <h3 style="text-transform:uppercase"><%= project.title %></h3>
+    <ul>
+      <% project.todos.each do |todo|%>
+        <li><%= todo.text %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<div id="new_todo_form" hidden="true">
+  <h3>НОВАЯ ЗАДАЧА</h3>
+  <%= form_with scope: :todo, url: todos_path, local: true, :html => {:id=>'form_id'} do |form| %>
+    <p>
+      <%= form.text_field :text, placeholder: "Название задачи..." %>
+    </p>
+    <div>
+      <%= form.collection_select :project_id, Project.all, :id, :title %>
+      <a id="form_selected"></a>
+    </div>
+    <p>
+      <a href="" id="cancel_btn">ОТМЕНА</a>
+      <a href="" id="submit_btn">ОК</a>
+    </p>
+  <% end %>
+</div>
