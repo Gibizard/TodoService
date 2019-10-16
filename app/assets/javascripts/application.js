@@ -14,12 +14,41 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree
+$(document).ready(function(){
+  $('input').iCheck({
+    checkboxClass: 'icheckbox_square-blue',
+    radioClass: 'iradio_square-blue',
+  });
+
+  $('.icheckbox_square-blue.checked').each(function(){
+    this.closest('li').style.setProperty("text-decoration", "line-through");
+  });
+
+  $('.icheckbox_square-blue').on('ifChecked', function(event){
+    this.closest('li').style.setProperty("text-decoration", "line-through");
+  });
+  $('.icheckbox_square-blue').on('ifUnchecked', function(event){
+    this.closest('li').style.setProperty("text-decoration", "none");
+  });
+});
+
 $(document).ready(function() {
+  $('select').select2();
+  $("select").select2({
+    width: '100%' // for shure
+  });
+  $('select').select2({
+    minimumResultsForSearch: -1
+  });
+});
+
+$(document).ready(function() {
+  $('.overlay').hide();
   $('#new_todo').click(function() {
-    $('#new_todo_form').show();
+    $('.overlay').show();
   });
   $('#cancel_btn').click(function(event) {
     event.preventDefault();
-    $('#new_todo_form').hide();
+    $('.overlay').hide();
   });
 });

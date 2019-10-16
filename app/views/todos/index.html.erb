@@ -1,29 +1,49 @@
-<div>
-  <h1>Задачи</h1>
-  <%= image_tag @plus_img, size: '40x40', id: 'new_todo'%>
-  <% @projects.each do |project| %>
-    <h3 style="text-transform:uppercase"><%= project.title %></h3>
-    <ul>
-      <% project.todos.each do |todo|%>
-        <li><%= todo.text %></li>
-      <% end %>
-    </ul>
-  <% end %>
+<header>
+    <%= image_tag @plus_img, size: '20x20', class: 'header', id: 'new_todo'%>
+    <h1 class="header" id="tasksLable">Задачи</h1>
+</header>
+<div class="boxes container-fluid">
+<% @projects.each do |project| %>
+  <div class="col-lg-4 col-md-6 col-xs-12 col-sm-12">
+    <div class="box">
+      <div id="project_label_div">
+        <h5 style="text-transform:uppercase" id="project_label"><%= project.title %></h5>
+      </div>
+      <ul type="none">
+        <% project.todos.each do |todo|%>
+        <li class="li_todo">
+<%#          <% form_with() do |f| %>
+            <%= check_box_tag '', todo.id, todo.isCompleted %>
+            <%= todo.text %>
+<%#          <% end %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
 </div>
 
-<div id="new_todo_form" hidden="true">
-  <h3>НОВАЯ ЗАДАЧА</h3>
-  <%= form_with scope: :todo, url: todos_path, local: true, :html => {:id=>'form_id'} do |form| %>
-    <p>
-      <%= form.text_field :text, placeholder: "Название задачи..." %>
-    </p>
-    <div>
-      <%= form.collection_select :project_id, Project.all, :id, :title %>
-      <a id="form_selected"></a>
+<div class="overlay" hidden="true">
+  <div id="new_todo_form">
+    <div id="new_todo_label_div">
+      <h5 style="text-transform:uppercase" id="new_todo_label">НОВАЯ ЗАДАЧА</h5>
     </div>
-    <p>
-      <a href="" id="cancel_btn">ОТМЕНА</a>
-      <a href="" id="submit_btn">ОК</a>
-    </p>
-  <% end %>
+    <%= form_with scope: :todo, url: todos_path, local: true, :html => {:id=>'form_id'} do |form| %>
+      <div class="form_text">
+        <%= form.text_field :text, placeholder: "Название задачи..."%>
+      </div>
+      <div class="form_select">
+        <%= form.collection_select :project_id, Project.all, :id, :title%>
+      </div>
+      <div class="form_links container-fluid">
+        <div class="buttons" id="cancel">
+          <a class="links" href="" id="cancel_btn">ОТМЕНА</a>
+        </div>
+        <div class="buttons" id="ok">
+          <a class="links" href="" id="submit_btn">ОК</a>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
