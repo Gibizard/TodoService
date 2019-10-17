@@ -11,12 +11,12 @@
       </div>
       <ul type="none">
         <% project.todos.each do |todo|%>
-        <li class="li_todo">
-<%#          <% form_with() do |f| %>
-            <%= check_box_tag '', todo.id, todo.isCompleted %>
-            <%= todo.text %>
-<%#          <% end %>
-        </li>
+          <li class="li_todo">
+            <%= form_with model: todo, url: todo_path(todo.id), local: true, class: 'check_form' do %>
+              <%= check_box_tag todo.id, todo.isCompleted, todo.isCompleted %>
+              <%= label_tag todo.id, todo.text %>
+            <% end %>
+          </li>
         <% end %>
       </ul>
     </div>

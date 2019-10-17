@@ -156,10 +156,6 @@ li{
    border-radius: 0 !important;
 }
 
-.select2-container{
-  width: 100%;
-}
-
 [name="todo[text]"]{
   font-family: 'OpenSans';
   width: 100%;

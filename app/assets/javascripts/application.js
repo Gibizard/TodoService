@@ -14,6 +14,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree
+console.log("WORK");
 $(document).ready(function(){
   $('input').iCheck({
     checkboxClass: 'icheckbox_square-blue',
@@ -30,13 +31,18 @@ $(document).ready(function(){
   $('.icheckbox_square-blue').on('ifUnchecked', function(event){
     this.closest('li').style.setProperty("text-decoration", "none");
   });
+
+  $('.icheckbox_square-blue').on('ifToggled', function(event){
+    event.preventDefault();
+    this.closest(".check_form").submit();
+  });
 });
 
 $(document).ready(function() {
   $('select').select2();
-  $("select").select2({
-    width: '100%' // for shure
-  });
+//  $("select").select2({
+//    width: '100%' // for shure
+//  });
   $('select').select2({
     minimumResultsForSearch: -1
   });

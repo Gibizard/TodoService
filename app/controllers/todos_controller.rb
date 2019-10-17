@@ -6,7 +6,16 @@ class TodosController < ApplicationController
   end
 
   def update
-    @todo = Todo.update(chech_params)
+    todo = Todo.find(check_params[:id])
+
+    if todo.isCompleted
+      todo.isCompleted = false
+    elsif !todo.isCompleted
+      todo.isCompleted = true
+    end
+
+    todo.save
+    redirect_to '/'
   end
 
   def create
@@ -21,6 +30,6 @@ class TodosController < ApplicationController
   end
 
   private def check_params
-    params.require(:todo).permit(:id, :isCompleted)
+    params.permit(:id)
   end
 end
